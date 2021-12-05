@@ -27,17 +27,15 @@ public class MainActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
+                if (username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
                     //correct
                     Toast.makeText(MainActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
-                }else
+                } else
                     //incorrect
-            }
-
-
-
-
+                    Toast.makeText(MainActivity.this, "Login Failed!!!!!", Toast.LENGTH_SHORT).show();
 
             }
+
         });
+    }
 }
