@@ -23,7 +23,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/username"
+        android:id="@+id/username1"
         android:hint="Username"
         android:textColorHint="@color/white"
         android:textSize="25dp"
@@ -36,7 +36,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/password"
+        android:id="@+id/password1"
         android:hint="Password"
         android:textColorHint="@color/white"
         android:textSize="25dp"

@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/edittextbackground.xml" value="0.4197916666666667" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.38958333333333334" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2558876811594203" />
       </map>
