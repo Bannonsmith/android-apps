@@ -3,6 +3,7 @@ package com.example.sqlloginregister;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,7 +14,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
 
-    EditText username,password,repassword;
+    EditText username,password,repassword,holder;
     Button signUpBtn, goToSignInBtn;
     DBHelper DB;
     @Override
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                                 startActivity(intent);
+
                             } else {
                                 Toast.makeText(MainActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
                             }

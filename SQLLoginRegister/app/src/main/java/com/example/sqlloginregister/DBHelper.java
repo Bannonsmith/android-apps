@@ -51,7 +51,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public Boolean checkUsernamePassword(String username, String password) {
-        Cursor cursor = db.rawQuery("select * from users where ussername=?", new String[] {username,password});
+        Cursor cursor = db.rawQuery("select * from users where username=? and password=?", new String[] {username,password});
         if(cursor.getCount()>0) {
             return true;
         } else {
