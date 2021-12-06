@@ -7,12 +7,12 @@
     android:padding="10dp"
     android:orientation="vertical"
     android:background="@color/teal_700"
-    tools:context=".MainActivity">
+    tools:context=".LoginActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
+        android:text="Sign In"
         android:textColor="@color/white"
         android:textSize="40dp"
         android:textStyle="bold"
@@ -47,40 +47,19 @@
         android:layout_marginBottom="30dp"
         android:paddingLeft="20dp"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/repassword"
-        android:hint="Confirm Password"
-        android:textColorHint="@color/white"
-        android:textSize="25dp"
-        android:inputType="textPassword"
-        android:background="@drawable/edittextbackground"
-        android:drawableLeft="@drawable/ic_baseline_info_24"
-        android:layout_marginBottom="30dp"
-        android:paddingLeft="20dp"/>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:id="@+id/signUpBtn"
-        android:text="register"
+        android:id="@+id/signInBtn"
+        android:text="Sign in"
         android:textSize="20dp"
         android:backgroundTint="@color/white"
         android:textColor="@color/black"
         android:fontFamily="sans-serif-light"
         android:textStyle="bold"
         android:layout_marginBottom="30dp"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:id="@+id/goToSigInBtn"
-        android:text="Already have a account"
-        android:textSize="15dp"
-        android:backgroundTint="#02000000"
-        android:textColor="@color/black"
-        android:fontFamily="sans-serif-light"
-        android:textStyle="bold"
-        android:layout_marginBottom="30dp"/>
+
 
 
 
