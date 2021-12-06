@@ -11,6 +11,9 @@ import androidx.annotation.Nullable;
 public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DBNAME="login.db";
+    SQLiteDatabase db = this.getWritableDatabase();
+
+
     public DBHelper(Context context) {
         super(context, "login.db", null, 1);
     }
@@ -27,7 +30,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //insert data
     public Boolean insertData(String username, String password) {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         values.put("username", username);
@@ -40,11 +42,20 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     // check if username is in the db
     public Boolean checkUsername(String username) {
-        SQLiteDatabase db= this.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from users where username=?", new String[] {username});
-        if(cursor.getCount()>0)
+        if(cursor.getCount()>0) {
             return true;
-        else
+        } else {
             return false;
+        }
+    }
+
+    public Boolean checkUsernamePassword(String username, String password) {
+        Cursor cursor = db.rawQuery("select * from users where ussername=?", new String[] {username,password});
+        if(cursor.getCount()>0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
