@@ -22,10 +22,15 @@ public class WeatherDataService {
         this.context = context;
     }
 
+    public interface VolleyResponseListener {
+        void onError(String message);
+
+        void onResponse(String cityId);
+    }
 
 
 
-    public String getCityId(String cityName) {
+    public void getCityId(String cityName, VolleyResponseListener volleyResponseListener) {
         String url = SEARCH_QUERY + cityName;
 
 
@@ -39,20 +44,24 @@ public class WeatherDataService {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(context, "City ID = " + cityID, Toast.LENGTH_SHORT).show();
+//                this worked but it didn't return the id number to Main Activity
+              //  Toast.makeText(context, "City ID = " + cityID, Toast.LENGTH_SHORT).show();
+                volleyResponseListener.onResponse(cityID);
 //                            Prints the entire toString
 //                        Toast.makeText(MainActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "Something is wrong", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(context, "Something is wrong", Toast.LENGTH_SHORT).show();
+                volleyResponseListener.onError("Something is wrong");
+
             }
         });
 
         MySingleton.getInstance(context).addToRequestQueue(request);
-
-        return cityID;
+        // returned a NULL. problem!
+//        return cityID;
     }
 
 //    public List<WeatherReportModel> getCityForecastById(String cityId) {
