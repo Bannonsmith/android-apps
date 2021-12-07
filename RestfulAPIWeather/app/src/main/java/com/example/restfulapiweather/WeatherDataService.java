@@ -79,11 +79,11 @@ public class WeatherDataService {
     public interface foreCastByIDResponse {
         void onError(String message);
 
-        void onResponse(WeatherReportModel weatherReportModel);
+        void onResponse(List<WeatherReportModel> weatherReportModels);
     }
 
     public void getCityForecastById(String cityID, foreCastByIDResponse foreCastByIDResponse) {
-        List<WeatherReportModel> report = new ArrayList<>();
+        List<WeatherReportModel> weatherReportModels = new ArrayList<>();
         String url = QUERY_FOR_CITY_WEATHER_BY_ID + cityID;
 
 
@@ -96,29 +96,31 @@ public class WeatherDataService {
                 try {
                     JSONArray consolidated_weather_list = response.getJSONArray("consolidated_weather");
                     //get the first item in the array
-                    WeatherReportModel first_day = new WeatherReportModel();
+                    WeatherReportModel one_day_weather = new WeatherReportModel();
+
+                    for(int i = 0; i< consolidated_weather_list.length(); i++) {
 
 
+                        JSONObject firstDayFromApi = (JSONObject) consolidated_weather_list.get(i);
+                        one_day_weather.setId(firstDayFromApi.getInt("id"));
+                        one_day_weather.setWeather_state_name(firstDayFromApi.getString("weather_state_name"));
+                        one_day_weather.setWeather_state_abbr(firstDayFromApi.getString("weather_state_abbr"));
+                        one_day_weather.setWind_direction_compass(firstDayFromApi.getString("wind_direction_compass"));
+                        one_day_weather.setCreated(firstDayFromApi.getString("created"));
+                        one_day_weather.setApplicable_date(firstDayFromApi.getString("applicable_date"));
+                        one_day_weather.setMin_temp(firstDayFromApi.getLong("min_temp"));
+                        one_day_weather.setMax_temp(firstDayFromApi.getLong("max_temp"));
+                        one_day_weather.setThe_temp(firstDayFromApi.getLong("the_temp"));
+                        one_day_weather.setWind_speed(firstDayFromApi.getLong("wind_speed"));
+                        one_day_weather.setWind_direction(firstDayFromApi.getLong("wind_direction"));
+                        one_day_weather.setAir_pressure(firstDayFromApi.getInt("air_pressure"));
+                        one_day_weather.setHumidity(firstDayFromApi.getInt("humidity"));
+                        one_day_weather.setVisibility(firstDayFromApi.getLong("visibility"));
+                        one_day_weather.setPredictability(firstDayFromApi.getLong("predictability"));
+                        weatherReportModels.add(one_day_weather);
+                    }
 
-
-                    JSONObject firstDayFromApi = (JSONObject) consolidated_weather_list.get(0);
-                    first_day.setId(firstDayFromApi.getInt("id"));
-                    first_day.setWeather_state_name(firstDayFromApi.getString("weather_state_name"));
-                    first_day.setWeather_state_abbr(firstDayFromApi.getString("weather_state_abbr"));
-                    first_day.setWind_direction_compass(firstDayFromApi.getString("wind_direction_compass"));
-                    first_day.setCreated(firstDayFromApi.getString("created"));
-                    first_day.setApplicable_date(firstDayFromApi.getString("applicable_date"));
-                    first_day.setMin_temp(firstDayFromApi.getLong("min_temp"));
-                    first_day.setMax_temp(firstDayFromApi.getLong("max_temp"));
-                    first_day.setThe_temp(firstDayFromApi.getLong("the_temp"));
-                    first_day.setWind_speed(firstDayFromApi.getLong("wind_speed"));
-                    first_day.setWind_direction(firstDayFromApi.getLong("wind_direction"));
-                    first_day.setAir_pressure(firstDayFromApi.getInt("air_pressure"));
-                    first_day.setHumidity(firstDayFromApi.getInt("humidity"));
-                    first_day.setVisibility(firstDayFromApi.getLong("visibility"));
-                    first_day.setPredictability(firstDayFromApi.getLong("predictability"));
-
-                 foreCastByIDResponse.onResponse(first_day);
+                 foreCastByIDResponse.onResponse(weatherReportModels);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
