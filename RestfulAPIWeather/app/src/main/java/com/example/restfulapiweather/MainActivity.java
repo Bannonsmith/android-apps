@@ -45,8 +45,9 @@ public class MainActivity extends AppCompatActivity {
         btn_cityId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Instantiate the RequestQueue.
-                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+//                // Instantiate the RequestQueue.
+//                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+                
                 String url ="https://www.metaweather.com/api/location/search/?query=" + et_dataInput.getText().toString();
 
 
