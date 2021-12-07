@@ -3,18 +3,30 @@ package com.example.restfulapiweather;
 import android.content.Context;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
 public class WeatherDataService {
 
     public static final String SEARCH_QUERY = "https://www.metaweather.com/api/location/search/?query=";
+    public static final String QUERY_FOR_CITY_WEATHER_BY_ID = "https://www.metaweather.com/api/location/";
+
     Context context;
     String cityID;
 
@@ -64,9 +76,30 @@ public class WeatherDataService {
 //        return cityID;
     }
 
-//    public List<WeatherReportModel> getCityForecastById(String cityId) {
-//
-//    }
+    public void getCityForecastById(String cityID) {
+        List<WeatherReportModel> report = new ArrayList<>();
+        String url = QUERY_FOR_CITY_WEATHER_BY_ID + cityID;
+
+
+        // get the json object
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+        } , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+            //get the property called "consolodated_weather which is an array
+
+        MySingleton.getInstance(context).addToRequestQueue(request);
+    }
+        // get each item in the array and assign it to a new Weather Report object
+
 //
 //    public List<WeatherReportModel> getCityForecastByName(String cityName) {
 //
