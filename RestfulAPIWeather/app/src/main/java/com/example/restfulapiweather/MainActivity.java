@@ -45,35 +45,12 @@ public class MainActivity extends AppCompatActivity {
         btn_cityId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                // Instantiate the RequestQueue.
-//                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+                WeatherDataService weatherDataService = new WeatherDataService(MainActivity.this);
 
-                String url ="https://www.metaweather.com/api/location/search/?query=" + et_dataInput.getText().toString();
+                String cityID = weatherDataService.getCityId(et_dataInput.getText().toString());
+                Toast.makeText(MainActivity.this, "MMMMMM" + cityID, Toast.LENGTH_SHORT).show();
 
 
-                JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        String cityID = "";
-                        try {
-                            JSONObject cityInfo = response.getJSONObject(0);
-                            cityID = cityInfo.getString("woeid");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        Toast.makeText(MainActivity.this, "City ID = " + cityID, Toast.LENGTH_SHORT).show();
-//                            Prints the entire toString
-//                        Toast.makeText(MainActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MainActivity.this, "Something is wrong", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                MySingleton.getInstance(MainActivity.this).addToRequestQueue(request);
-                
             }
         });
 
