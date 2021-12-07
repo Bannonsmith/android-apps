@@ -14,7 +14,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
 
-    EditText username,password,repassword,holder;
+    EditText username,password,repassword;
     Button signUpBtn, goToSignInBtn;
     DBHelper DB;
     @Override
