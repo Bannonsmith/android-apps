@@ -4,9 +4,9 @@ This is an application that uses metaweather api to show the weather for that ci
 
 ## Technologies
 
-**Android Studio**
-**API-MetaWeather**
-**Volley**
+- **Android Studio**
+- **API-MetaWeather**
+- **Volley**
 
 ## Features
 - call the API by ID
