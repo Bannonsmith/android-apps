@@ -96,11 +96,10 @@ public class WeatherDataService {
                 try {
                     JSONArray consolidated_weather_list = response.getJSONArray("consolidated_weather");
                     //get the first item in the array
-                    WeatherReportModel one_day_weather = new WeatherReportModel();
 
                     for(int i = 0; i< consolidated_weather_list.length(); i++) {
 
-
+                        WeatherReportModel one_day_weather = new WeatherReportModel();
                         JSONObject firstDayFromApi = (JSONObject) consolidated_weather_list.get(i);
                         one_day_weather.setId(firstDayFromApi.getInt("id"));
                         one_day_weather.setWeather_state_name(firstDayFromApi.getString("weather_state_name"));
@@ -139,8 +138,36 @@ public class WeatherDataService {
     }
         // get each item in the array and assign it to a new Weather Report object
 
-//
-//    public List<WeatherReportModel> getCityForecastByName(String cityName) {
-//
-//    }
+        public interface getCityForecastByNameCallback {
+            void onError(String message);
+            void onResponse(List<WeatherReportModel> weatherReportModels);
+        }
+    public void getCityForecastByName(String cityName, getCityForecastByNameCallback getCityForecastByNameCallback) {
+        // fetch the city id given the city name
+        getCityId(cityName, new VolleyResponseListener() {
+            @Override
+            public void onError(String message) {
+
+            }
+
+            @Override
+            public void onResponse(String cityId) {
+                // now we have two city Id
+                getCityForecastById(cityId, new foreCastByIDResponse() {
+                    @Override
+                    public void onError(String message) {
+
+                    }
+
+                    @Override
+                    public void onResponse(List<WeatherReportModel> weatherReportModels) {
+                        // we have the weather report.
+                        getCityForecastByNameCallback.onResponse(weatherReportModels);
+                    }
+                });
+            }
+        });
+        // fetch the city forecast given the city id
+
+    }
 }
